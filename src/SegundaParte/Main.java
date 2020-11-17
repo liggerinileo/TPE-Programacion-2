@@ -48,7 +48,7 @@ public class Main {
             EstrategiaTimbero timbero = new EstrategiaTimbero();
             Jugador jugador1 = new Jugador("Ligge", ambicioso);
             Jugador jugador2 = new Jugador("Guille", timbero);
-            Juego juego = new Juego(jugador1, jugador2, mazoMaestro, 10, 1);
+            Juego juego = new Juego(jugador1, jugador2, mazoMaestro, 10);
             
             juego.agregar_pocima(new PocimaPorcentaje(20, "Fortalecedora"));
             juego.agregar_pocima(new PocimaPorcentaje(55, "Fortalecedora Plus"));
@@ -60,13 +60,10 @@ public class Main {
             juego.agregar_pocima(new PocimaSelectiva(43, "Selectiva Peso", "peso"));
             juego.agregar_pocima(new PocimaCocktail(new PocimaPorcentaje(20, "Fortalecedora"), new PocimaPorcentaje(50, "Fortalecedora Plus")));
             
-   
-            int eleccionJuego = juego.elegirTipoJuego();
-            if (eleccionJuego == 1) {
-            	juego.jugar();
-			} else if(eleccionJuego == 2) {
-				juego.jugar();
-			}
+            juego.repartir_pocimas();
+            
+           	juego.jugar();
+			
             
             reader.close();
         } catch (FileNotFoundException e) {
