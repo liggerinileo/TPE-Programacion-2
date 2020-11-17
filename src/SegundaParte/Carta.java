@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Carta {
 	private String nombre;
-	private ArrayList<Atributo>atributos;
+	private ArrayList <Atributo> atributos;
 	private Pocima pocima;
 
-	public Carta(String nombre,ArrayList<Atributo> atributos) {
-		this.nombre=nombre;
-		this.atributos=atributos;
+	public Carta(String nombre, ArrayList<Atributo> atributos) {
+		this.nombre = nombre;
+		this.atributos = atributos;
 		this.pocima = null;
 	}
 
@@ -41,7 +41,7 @@ public class Carta {
 		return atributo;
 	}
 	
-	public int get_valor_atributo(String nombreAtributo) {
+	public double get_valor_atributo(String nombreAtributo) {
 		Atributo atributo = null;
 		int valor = 0; 
 		for (int i = 0; i < atributos.size(); i++) {

@@ -60,6 +60,7 @@ public class Main {
             juego.agregar_pocima(new PocimaSelectiva(43, "Selectiva Peso", "peso"));
             juego.agregar_pocima(new PocimaCocktail(new PocimaPorcentaje(20, "Fortalecedora"), new PocimaPorcentaje(50, "Fortalecedora Plus")));
             
+            /*Si juego con pocimas las reparto*/
             juego.repartir_pocimas();
             
            	juego.jugar();

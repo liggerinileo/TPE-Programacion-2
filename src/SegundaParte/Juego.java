@@ -7,14 +7,14 @@ public class Juego {
 	private Jugador jugador2;
 	private Mazo mazo;
 	private int maximoRondas;
-	private int turno=1;
+	private int turno = 1;
 	private ArrayList<Pocima> pocimas;
 
 	public Juego(Jugador jugador1, Jugador jugador2, Mazo mazo, int maximoRondas) {
 		this.jugador1 = jugador1;
 		this.jugador2 = jugador2;
-		this.mazo=mazo;
-		this.maximoRondas=maximoRondas;
+		this.mazo = mazo;
+		this.maximoRondas = maximoRondas;
 		this.pocimas = new ArrayList<Pocima>();
 	}
 
@@ -88,11 +88,11 @@ public class Juego {
 
 		if (turno == 1) {
 			Atributo atributoEstrategia = CartaJugador1.elegirEstrategia(jugador1.get_estrategia());
-			int valorAtributo = atributoEstrategia.get_valor();
-			int valorAtributoJug2 = CartaJugador2.get_valor_atributo(atributoEstrategia.get_nombre());
+			double valorAtributo = atributoEstrategia.get_valor();
+			double valorAtributoJug2 = CartaJugador2.get_valor_atributo(atributoEstrategia.get_nombre());
 			boolean cartaJug1TienePocima = false;
-			int valorAtributoPocimado = 0;
-			int valorAtributoPocimadoJug2 = 0;
+			double valorAtributoPocimado = 0;
+			double valorAtributoPocimadoJug2 = 0;
 			String nombrePocimaJug1 = "";
 
 			System.out.println("El jugador "+nombreJug1+" selecciona competir por el atributo "+atributoEstrategia.get_nombre());
@@ -180,11 +180,11 @@ public class Juego {
 			}
 		} else {
 			Atributo atributoEstrategia = CartaJugador2.elegirEstrategia(jugador1.get_estrategia());
-			int valorAtributo = atributoEstrategia.get_valor();
-			int valorAtributoJug1 = CartaJugador1.get_valor_atributo(atributoEstrategia.get_nombre());
+			double valorAtributo = atributoEstrategia.get_valor();
+			double valorAtributoJug1 = CartaJugador1.get_valor_atributo(atributoEstrategia.get_nombre());
 			boolean cartaJug2TienePocima = false;
-			int valorAtributoPocimado = 0;
-			int valorAtributoPocimadoJug1 = 0;
+			double valorAtributoPocimado = 0;
+			double valorAtributoPocimadoJug1 = 0;
 			String nombrePocimaJug2 = "";
 
 			System.out.println("El jugador "+nombreJug2+" selecciona competir por el atributo "+atributoEstrategia.get_nombre());

@@ -1,18 +1,18 @@
 package SegundaParte;
 
 public class PocimaPorcentaje implements Pocima {
-	private int porcentaje;
+	private double porcentaje;
 	private String nombre;
 	
-	public PocimaPorcentaje(int porcentaje, String nombre) {
+	public PocimaPorcentaje(double porcentaje, String nombre) {
 		this.porcentaje = porcentaje;
 		this.nombre = nombre;
 	}
 	
 	@Override
-	public int agregarPocima(Atributo atributo) {
-		int valorActual = atributo.get_valor();
-		int nuevoValor = valorActual + ((porcentaje * valorActual)/100);
+	public double agregarPocima(Atributo atributo) {
+		double valorActual = atributo.get_valor();
+		double nuevoValor = valorActual + ((porcentaje * valorActual)/100);
 		
 		return nuevoValor;
 	}

@@ -3,9 +3,9 @@ package SegundaParte;
 
 public class Atributo implements Comparable<Atributo>{
 	private String nombre;
-	private int valor;
+	private double valor;
 	
-	public Atributo(String nombre,int valor) { //CONSTRUCTOR CON VALORES DE LOS PARAMETROS NOMBRE Y VALOR
+	public Atributo(String nombre, double valor) { //CONSTRUCTOR CON VALORES DE LOS PARAMETROS NOMBRE Y VALOR
 		this.nombre=nombre;
 		this.valor = valor;
 	}
@@ -14,11 +14,11 @@ public class Atributo implements Comparable<Atributo>{
 		return nombre;
 	}
 	
-	public int get_valor() {
+	public double get_valor() {
 		return valor;
 	}
 
-	public void set_valor(int valor) {
+	public void set_valor(double valor) {
 		this.valor = valor;
 	}
 	

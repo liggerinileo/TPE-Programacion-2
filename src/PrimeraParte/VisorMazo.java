@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
 public class VisorMazo {
     public static void mostrarMazo(String jsonFile) {
         File jsonInputFile = new File(jsonFile);
@@ -18,7 +19,7 @@ public class VisorMazo {
             JsonReader reader = Json.createReader(is);
             JsonArray cartas = (JsonArray) reader.readObject().getJsonArray("cartas");
         
-            Mazo mazoMaestro = new Mazo("Superh�roes"); // MAZO ORIGINAL DEL JUEGO
+            Mazo mazoMaestro = new Mazo(); // MAZO ORIGINAL DEL JUEGO
            
             for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
             	ArrayList<Atributo> atributosCarta = new ArrayList<Atributo>();
@@ -36,7 +37,10 @@ public class VisorMazo {
                 Carta c = new Carta(nombreCarta, atributosCarta);
                 mazoMaestro.agregar_carta(c);
             }    
-            Juego juego = new Juego(mazoMaestro,20);//SE LE PASA EL MAZO, Y EL MAXIMO DE RONDAS 
+            
+            Jugador jugador1 = new Jugador("Ligge");
+            Jugador jugador2 = new Jugador("Guille");
+            Juego juego = new Juego(mazoMaestro, jugador1, jugador2, 10);
             juego.jugar();
             reader.close();
 
