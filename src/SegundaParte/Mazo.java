@@ -39,5 +39,9 @@ public class Mazo {
 	public Carta getCarta(int i) {
 		return cartas.get(i);
 	}
+	
+	public void eliminarCarta() {
+		cartas.remove(0);
+	}
 
 }
