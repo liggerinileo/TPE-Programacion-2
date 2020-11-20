@@ -70,13 +70,16 @@ public class Juego {
 		if(jugador1.getCantidadCartas() > jugador2.getCantidadCartas()) {
 			System.out.println("--------------- Ganador  ---------------");
 			System.out.println("Ganó el juego: "+jugador1.getNombre());
+			
 		}
 		else if (jugador1.getCantidadCartas() < jugador2.getCantidadCartas()) {
 			System.out.println("--------------- Ganador  ---------------");
 			System.out.println("Ganó el juego: "+jugador2.getNombre());
+			
 		} else {
 			System.out.println("--------------- Empate  ---------------");
 			System.out.println("Hubo Empate!");
+			
 		}
 	}	
 
@@ -93,9 +96,11 @@ public class Juego {
 		if (turno == 1) {
 			jugadorMano = jugador1;
 			jugadorSinMano = jugador2;
+			
 		} else {
 			jugadorMano = jugador2;
 			jugadorSinMano = jugador1;
+			
 		}
 		
 		cartaJugadorMano = jugadorMano.getCarta(0);
@@ -119,14 +124,18 @@ public class Juego {
 			valorAtriPocimadoJugMano = cartaJugadorMano.getPocima().agregarPocima(atributoEstrategia);
 			nombrePocimaJugMano = cartaJugadorMano.getPocima().getNombre();
 			cartaJugManoTienePocima = true;
+			
 		} else {
 			valorAtriPocimadoJugMano = valorAtriJugMano;
+			
 		}
 		
 		if (cartaJugadorSinMano.getPocima() != null) {
 			valorAtriPocimadoJugSinMano = cartaJugadorSinMano.getPocima().agregarPocima(cartaJugadorSinMano.get_atributo(atributoEstrategia.get_nombre()));
+		
 		} else {
 			valorAtriPocimadoJugSinMano = valorAtriJugSinMano;
+			
 		}
 
 		if (cartaJugManoTienePocima) {
@@ -149,6 +158,7 @@ public class Juego {
 	
 	private void ganadorRonda(double valorAtriJugMano, double valorAtriJugSinMano, Jugador jugadorMano, Jugador jugadorSinMano, 
 			Carta cartaJugadorMano, Carta cartaJugadorSinMano) {
+		
 		if (valorAtriJugMano > valorAtriJugSinMano) {	
 			divisionCartasFinalRonda(jugadorMano, jugadorSinMano, cartaJugadorMano, cartaJugadorSinMano, false);			
 
@@ -179,22 +189,24 @@ public class Juego {
 			jugador1.agregar_carta(cartaJugador2);
 			jugador1.devolver_mazo().eliminarCarta();
 			jugador2.devolver_mazo().eliminarCarta();
+			
 		} else {
 			jugador1.agregar_carta(cartaJugador1);
 			jugador1.devolver_mazo().eliminarCarta();
 			jugador2.agregar_carta(cartaJugador2);
 			jugador2.devolver_mazo().eliminarCarta();
+			
 		}
-
 	}
 
 	private void cambiarTurno(Jugador jugador) {
 		if (jugador == jugador1) {
 			this.turno = 1;
+			
 		} else if (jugador == jugador2) {
 			this.turno = 2;
+			
 		}
-
 	}
 
 }
