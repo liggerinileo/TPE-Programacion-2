@@ -37,6 +37,29 @@ public class Carta {
 		return false;
 	}
 	
+	public Atributo get_atributo(String nombreAtributo) {
+		Atributo atributo = null;
+		for (int i = 0; i < atributos.size(); i++) {
+			atributo = atributos.get(i);
+			if (atributo.get_nombre().equals(nombreAtributo)) {
+				return atributo;
+			}
+		}
+		return atributo;
+	}
+	
+	public double get_valor_atributo(String nombreAtributo) {
+		Atributo atributo = null;
+		int valor = 0; 
+		for (int i = 0; i < atributos.size(); i++) {
+			atributo = atributos.get(i);
+			if (atributo.get_nombre().equals(nombreAtributo)) {
+				return atributo.get_valor();
+			}
+		}
+		return valor;
+	}
+	
 	public String toString() {
 		return this.get_nombre() +""+ this.get_atributos();
 	}

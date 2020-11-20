@@ -44,4 +44,8 @@ public class Mazo {
 		return cartas.get(i);
 	}
 	
+	public void eliminarCarta() {
+		cartas.remove(0);
+	}
+	
 }

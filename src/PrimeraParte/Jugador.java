@@ -25,11 +25,12 @@ public class Jugador {
 		return (int)(Math.random() * (c.get_atributos().size()));
 	}
 	
-	public Carta getCarta(int i) {
-		return this.mazo.getCarta(i);
-	}
-	
 	public void agregar_carta(Carta c) {
 		this.mazo.agregar_carta(c);
 	}
+	
+	public Carta getCarta(int i) {
+		return this.mazo.getCarta(i);
+	}
+
 }

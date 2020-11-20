@@ -1,25 +1,24 @@
 package PrimeraParte;
 
-
 public class Juego {
 	private Jugador jugador1;
 	private Jugador jugador2;
 	private int maximoRondas;
 	private Mazo mazo;
 	private int turno = 1;
-	
+
 	public Juego(Mazo mazo, Jugador jugador1, Jugador jugador2, int maximoRondas) {
 		this.mazo = mazo;
 		this.jugador1 = jugador1;
 		this.jugador2 = jugador2;
 		this.maximoRondas = maximoRondas;
 	}
-	
+
 	public void jugar() {
-		int rondasJugadas = 0;
-		
+		int rondasJugadas = 1;
+
 		repartir();
-		
+
 		while(!verificarPartida(rondasJugadas)) {
 			System.out.println("--------------- Ronda "+rondasJugadas+ " ---------------");
 
@@ -37,7 +36,7 @@ public class Juego {
 			}
 		}
 	}
-	
+
 	public boolean verificarPartida(int rondasJugadas) {
 		if(rondasJugadas > maximoRondas) {
 			ganador_juego();
@@ -49,7 +48,7 @@ public class Juego {
 		}
 		return false;
 	}
-	
+
 	public void ganador_juego() {
 		if(jugador1.getCantidadCartas() > jugador2.getCantidadCartas()) {
 			System.out.println("--------------- Ganador  ---------------");
@@ -60,63 +59,107 @@ public class Juego {
 			System.out.println("Ganó el juego: "+jugador2.getNombre());
 		}
 	}
-	
-	public void ronda() {//comparar con la primer carta siempre get.(0)
-		int pos = 0;
-		if(turno == 1) {
-			 pos = jugador1.atributo_aleatorio(jugador1.getCarta(0));
-				System.out.println("El jugador "+jugador1.getNombre()+" selecciona competir por el atributo "+jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_nombre());
+
+	private void ronda() {
+		Jugador jugadorMano = null;
+		Jugador jugadorSinMano = null;
+		Carta cartaJugadorMano = null;
+		Carta cartaJugadorSinMano = null;
+		String nombreJugMano = "";
+		String nomJugSinMano = "";
+		String nomCartaJugMano = "";
+		String nomCartaJugSinMano = "";
+		int posAtributoRandom = 0; 
+		Atributo atributoSeleccionado = null;
+		double valorAtriJugMano = 0;
+		double valorAtriJugSinMano = 0;
+
+		if (turno == 1) {
+			jugadorMano = jugador1;
+			jugadorSinMano = jugador2;
+
+		} else {
+			jugadorMano = jugador2;
+			jugadorSinMano = jugador1;
 
 		}
-		else if(turno==2) {
-			 pos=jugador2.atributo_aleatorio(jugador2.getCarta(0));
-				System.out.println("El jugador "+jugador2.getNombre()+" selecciona competir por el atributo "+jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_nombre());
 
-		}
-		if((jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor()) > (jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor())){
+		cartaJugadorMano = jugadorMano.getCarta(0);
+		cartaJugadorSinMano = jugadorSinMano.getCarta(0);
+		nombreJugMano = jugadorMano.getNombre();
+		nomJugSinMano = jugadorSinMano.getNombre();
+		nomCartaJugMano = cartaJugadorMano.get_nombre();
+		nomCartaJugSinMano = cartaJugadorSinMano.get_nombre();
+		posAtributoRandom = jugadorMano.atributo_aleatorio(cartaJugadorMano);
+		atributoSeleccionado = cartaJugadorMano.get_atributos().get(posAtributoRandom);
+		valorAtriJugMano = atributoSeleccionado.get_valor();
+		valorAtriJugSinMano = cartaJugadorSinMano.get_atributo(atributoSeleccionado.get_nombre()).get_valor();
 
-			 System.out.println("La carta de "+jugador1.getNombre()+ " es "+jugador1.devolver_mazo().get_cartas().get(0).get_nombre()+" con "+jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_nombre()+" "+jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor() );
-			 System.out.println("La carta de "+jugador2.getNombre()+ " es "+jugador2.devolver_mazo().get_cartas().get(0).get_nombre()+" con "+jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_nombre()+" "+jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor() );
-			 
-			 System.out.println("Ganó la ronda: "+jugador1.getNombre());
-			 
-			jugador1.devolver_mazo().get_cartas().add(jugador1.devolver_mazo().get_cartas().get(0));	
-			jugador1.devolver_mazo().get_cartas().remove(0);	
-			jugador1.devolver_mazo().get_cartas().add(jugador2.devolver_mazo().get_cartas().get(0));	
-			jugador2.devolver_mazo().get_cartas().remove(0);	
-			cambiarTurno(1);
-		}
-		else if ((jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor()) < (jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor())){
-			 System.out.println("La carta de "+jugador2.getNombre()+ " es "+jugador2.devolver_mazo().get_cartas().get(0).get_nombre()+" con "+jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_nombre()+" "+jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor() );
-			 System.out.println("La carta de "+jugador1.getNombre()+ " es "+jugador1.devolver_mazo().get_cartas().get(0).get_nombre()+" con "+jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_nombre()+" "+jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor() );
-			 System.out.println("Ganó la ronda: "+jugador2.getNombre());
-			
-			jugador2.devolver_mazo().get_cartas().add(jugador1.devolver_mazo().get_cartas().get(0));	
-			jugador2.devolver_mazo().get_cartas().remove(0);	
-			jugador2.devolver_mazo().get_cartas().add(jugador2.devolver_mazo().get_cartas().get(0));	
-			jugador1.devolver_mazo().get_cartas().remove(0);	
-			cambiarTurno(2);
-		}
-		else {
-			if(turno==1) {
-				 System.out.println("La carta de "+jugador1.getNombre()+ " es "+jugador1.devolver_mazo().get_cartas().get(0).get_nombre()+" con "+jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_nombre()+" "+jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor() );			
-				 System.out.println("La carta de "+jugador2.getNombre()+ " es "+jugador2.devolver_mazo().get_cartas().get(0).get_nombre()+" con "+jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_nombre()+" "+jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor() );
-			}
-			else {
-				 System.out.println("La carta de "+jugador2.getNombre()+ " es "+jugador2.devolver_mazo().get_cartas().get(0).get_nombre()+" con "+jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_nombre()+" "+jugador2.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor() );
-				 System.out.println("La carta de "+jugador1.getNombre()+ " es "+jugador1.devolver_mazo().get_cartas().get(0).get_nombre()+" con "+jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_nombre()+" "+jugador1.devolver_mazo().get_cartas().get(0).get_atributos().get(pos).get_valor() );
-			}
-			System.out.println("Empate");
-			jugador1.devolver_mazo().get_cartas().add(jugador1.devolver_mazo().get_cartas().get(0));	
-			jugador1.devolver_mazo().get_cartas().remove(0);	
-			jugador2.devolver_mazo().get_cartas().add(jugador2.devolver_mazo().get_cartas().get(0));	
-			jugador2.devolver_mazo().get_cartas().remove(0);
-		}
-		System.out.println(jugador1.getNombre()+" posee ahora "+jugador1.getCantidadCartas()+" cartas y "+jugador2.getNombre()+ " posee ahora "+jugador2.getCantidadCartas()+" cartas.");
-	}	
-	
-	public void cambiarTurno(int turno) {
-		this.turno = turno;
+		System.out.println("El jugador "+nombreJugMano+" selecciona competir por el atributo "+atributoSeleccionado.get_nombre());
+
+
+		System.out.println("La carta de "+nombreJugMano+" es "+nomCartaJugMano+" con "+
+				atributoSeleccionado.get_nombre()+" "+valorAtriJugMano);
+		
+		System.out.println("La carta de "+nomJugSinMano+" es "+nomCartaJugSinMano+" con "+
+				atributoSeleccionado.get_nombre()+" "+valorAtriJugSinMano);
+
+		ganadorRonda(valorAtriJugMano, valorAtriJugSinMano, jugadorMano, jugadorSinMano, cartaJugadorMano, cartaJugadorSinMano);
+
+
 	}
-	
+
+	private void ganadorRonda(double valorAtriJugMano, double valorAtriJugSinMano, Jugador jugadorMano, Jugador jugadorSinMano, 
+			Carta cartaJugadorMano, Carta cartaJugadorSinMano) {
+
+		if (valorAtriJugMano > valorAtriJugSinMano) {	
+			divisionCartasFinalRonda(jugadorMano, jugadorSinMano, cartaJugadorMano, cartaJugadorSinMano, false);			
+
+			System.out.println("Gana la ronda "+jugadorMano.getNombre()+" y queda con "+jugadorMano.getCantidadCartas()+
+					" cartas y "+jugadorSinMano.getNombre()+" posee ahora "+jugadorSinMano.getCantidadCartas());
+
+			cambiarTurno(jugadorMano);
+
+		} else if (valorAtriJugMano < valorAtriJugSinMano) {
+			divisionCartasFinalRonda(jugadorSinMano, jugadorMano, cartaJugadorSinMano, cartaJugadorMano, false);
+
+			System.out.println("Gana la ronda "+jugadorSinMano.getNombre()+" y queda con "+jugadorSinMano.getCantidadCartas()+
+					" cartas y "+jugadorMano.getNombre()+" posee ahora "+jugadorMano.getCantidadCartas());
+
+			cambiarTurno(jugadorSinMano);
+
+		} else {
+			divisionCartasFinalRonda(jugadorMano, jugadorSinMano, cartaJugadorMano, cartaJugadorSinMano, true);
+
+			System.out.println("Hubo Empate!");
+
+		}
+	}
+
+	private void divisionCartasFinalRonda(Jugador jugador1, Jugador jugador2, Carta cartaJugador1, Carta cartaJugador2, boolean empate) {
+		if (!empate) {
+			jugador1.agregar_carta(cartaJugador1);
+			jugador1.agregar_carta(cartaJugador2);
+			jugador1.devolver_mazo().eliminarCarta();
+			jugador2.devolver_mazo().eliminarCarta();
+
+		} else {
+			jugador1.agregar_carta(cartaJugador1);
+			jugador1.devolver_mazo().eliminarCarta();
+			jugador2.agregar_carta(cartaJugador2);
+			jugador2.devolver_mazo().eliminarCarta();
+
+		}
+	}
+
+	private void cambiarTurno(Jugador jugador) {
+		if (jugador == jugador1) {
+			this.turno = 1;
+
+		} else if (jugador == jugador2) {
+			this.turno = 2;
+
+		}
+	}
+
 }
